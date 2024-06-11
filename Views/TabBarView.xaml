@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Tasktrix.Views.TabBarView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:simpleCore="clr-namespace:SimpleToolkit.Core;assembly=SimpleToolkit.Core">
+
+    <Border
+        Padding="15,10"
+        Background="{StaticResource TabBarColor}"
+        MaximumWidthRequest="{OnPlatform WinUI=760}"
+        MinimumWidthRequest="{OnPlatform Default=240,
+                                         WinUI=340}"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="25,25,0,0" />
+        </Border.StrokeShape>
+        <AbsoluteLayout
+            x:Name="absoluteLayout"
+            Margin="0"
+            Padding="0"
+            Background="Transparent"
+            HeightRequest="50">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="25" />
+                        </Border.StrokeShape>
+                        <simpleCore:ContentButton Background="{Binding SecondarySelectionColor}" Clicked="ButtonClicked">
+                            <Grid
+                                ColumnDefinitions="60, *"
+                                CompressedLayout.IsHeadless="True"
+                                HeightRequest="50">
+                                <simpleCore:Icon
+                                    HeightRequest="25"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding IconSource}"
+                                    TintColor="{Binding PrimarySelectionColor}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="22" />
+                                <ContentView
+                                    Grid.Column="1"
+                                    Margin="0,0,30,0"
+                                    CompressedLayout.IsHeadless="True"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        LineBreakMode="NoWrap"
+                                        Text="{Binding Title}"
+                                        TextColor="{Binding PrimarySelectionColor}" />
+                                </ContentView>
+                            </Grid>
+                        </simpleCore:ContentButton>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </AbsoluteLayout>
+    </Border>
+</ContentView>

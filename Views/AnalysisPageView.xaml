@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Tasktrix.Views.AnalysisPageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+    Title="AnalysisPageView"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid
+        Padding="10"
+        ColumnSpacing="10"
+        RowSpacing="10">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="140" />
+            <RowDefinition Height="130" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame
+            Grid.Row="0"
+            Grid.Column="0"
+            Style="{DynamicResource ChartFrame}">
+            <StackLayout
+                Padding="10"
+                HorizontalOptions="Center"
+                Spacing="5"
+                VerticalOptions="Center">
+                <Label
+                    x:Name="Todoitems"
+                    FontFamily="InterBold"
+                    FontSize="20"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource PriorityLabel}"
+                    TextColor="DimGray" />
+                <Label
+                    x:Name="Lowpriority"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource PriorityLabel}"
+                    TextColor="DimGray" />
+                <Label
+                    x:Name="Mediumpriority"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource PriorityLabel}"
+                    TextColor="DimGray" />
+                <Label
+                    x:Name="Highpriority"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource PriorityLabel}"
+                    TextColor="DimGray" />
+            </StackLayout>
+        </Frame>
+
+        <Frame
+            Grid.Row="2"
+            Grid.Column="0"
+            Padding="15"
+            Style="{DynamicResource ChartFrame}">
+            <charts:ChartView x:Name="PieChartView" WidthRequest="{OnPlatform iOS=365, Android=365}" />
+        </Frame>
+
+        <Frame
+            Grid.Row="1"
+            Grid.ColumnSpan="0"
+            Style="{DynamicResource ChartFrame}">
+            <charts:ChartView x:Name="DonutChartView"  WidthRequest="{OnPlatform iOS=365, Android=330}" />
+        </Frame>
+
+        <ListView
+            x:Name="ListView"
+            BackgroundColor="White"
+            CachingStrategy="RecycleElement"
+            IsVisible="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" />
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

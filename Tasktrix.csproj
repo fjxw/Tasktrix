@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-ios;net8.0-android</TargetFrameworks>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
+		<RootNamespace>Tasktrix</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>Tasktrix</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.maui.tasktrix</ApplicationId>
+		<ApplicationIdGuid>14966315-2970-4b3d-9ece-fe82a9956394</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+		<CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+		<CreatePackage>false</CreatePackage>
+		<RunAOTCompilation>False</RunAOTCompilation>
+		<MtouchLink>None</MtouchLink>
+		<PublishTrimmed>true</PublishTrimmed>
+		<PublishSingleFile>false</PublishSingleFile>
+		<PublishReadyToRun>false</PublishReadyToRun>
+		<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.png" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\AppIcon\appicon.png" Color="#d6e0ff" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\AppIcon\appicon.png" />
+		<None Remove="Resources\Images\addnew.png" />
+		<None Remove="Resources\Images\checkLight.png" />
+		<None Remove="Resources\Images\donetoolbar.png" />
+		<None Remove="Resources\Images\doneselected.png" />
+		<None Remove="Resources\Images\icon.png" />
+		<None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
+		<None Remove="Resources\Images\settingsWhite.png" />
+		<None Remove="Resources\Images\themewhite.png" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="7.0.1" />
+		<PackageReference Include="Material.Components.Maui" Version="0.2.2-preview" />
+		<PackageReference Include="Microsoft.Maui.Controls.Foldable" Version="8.0.14" />
+		<PackageReference Include="SimpleToolkit.Core" Version="4.0.0" />
+		<PackageReference Include="SimpleToolkit.SimpleShell" Version="4.1.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
+		<PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.8" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.8" />
+		<PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.8" />
+		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.7.0" />
+		<PackageReference Update="Microsoft.Maui.Controls" Version="8.0.14" />
+		<PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.21" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Views\TaskObjPageView.xaml">
+			<Generator></Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\TaskPageView.xaml">
+			<Generator></Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+		<PackageReference Include="Microcharts.Maui" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Views\AnalysisPageView.xaml.cs">
+			<DependentUpon>AnalysisPageView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\TaskObjPageView.xaml.cs">
+			<DependentUpon>TaskObjPageView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\TaskPageView.xaml.cs">
+			<DependentUpon>TaskPageView.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+</Project>

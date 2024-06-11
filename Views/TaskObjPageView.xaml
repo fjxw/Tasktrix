@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Tasktrix.Views.TaskObjPageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Tasktrix.Models"
+    Title="{Binding Name}"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.BindingContext>
+        <vm:TaskObj />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Always">
+            <StackLayout
+                Margin="20"
+                Spacing="20"
+                VerticalOptions="StartAndExpand">
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{OnPlatform Android=245, iOS=150}" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            x:Name="itemTitle"
+                            Grid.Column="0"
+                            FontFamily="Inter-Bold"
+                            FontSize="18"
+                            TextColor="DimGray"
+                            VerticalTextAlignment="Center" />
+
+                        <HorizontalStackLayout
+                            Grid.Column="1"
+                            HorizontalOptions="End"
+                            Spacing="{OnPlatform Android=-55, iOS=5}">
+                            <ImageButton
+                                Clicked="OnSaveClicked"
+                                HeightRequest="33"
+                                HorizontalOptions="Start"
+                                Source="save.png" />
+                            <ImageButton
+                                Clicked="Close"
+                                HeightRequest="35"
+                                HorizontalOptions="End"
+                                Source="close.png" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label
+                                FontFamily="Inter-Bold"
+                                FontSize="20"
+                                Text="Название" />
+                        </HorizontalStackLayout>
+                        <Frame
+                            Margin="0,10,0,0"
+                            Padding="7"
+                            CornerRadius="10"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{DynamicResource ToDoItemFrame}">
+                            <StackLayout>
+                                <Entry
+                                    x:Name="NameField"
+                                    Margin="0,0,0,0"
+                                    FontFamily="Inter-Regular"
+                                    PlaceholderColor="Gray"
+                                    ReturnType="Next"
+                                    Text="{Binding Name}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            FontFamily="Inter-Bold"
+                            FontSize="20"
+                            Text="Описание" />
+                    </HorizontalStackLayout>
+                    <Frame
+                        Margin="0,10,0,0"
+                        Padding="5"
+                        CornerRadius="10"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{DynamicResource ToDoItemFrame}">
+
+                        <Editor
+                            x:Name="DescField"
+                            FontFamily="Inter-Regular"
+                            HeightRequest="100"
+                            HorizontalTextAlignment="Start"
+                            PlaceholderColor="Grey"
+                            Text="{Binding Notes}"
+                            VerticalTextAlignment="Start" />
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

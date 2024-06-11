@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<simpleShell:SimpleShell
+    x:Class="Tasktrix.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Tasktrix.Models"
+    xmlns:pages="clr-namespace:Tasktrix.Views"
+    xmlns:simpleShell="clr-namespace:SimpleToolkit.SimpleShell;assembly=SimpleToolkit.SimpleShell"
+    x:Name="Shell"
+    Background="White">
+
+    <Tab>
+        <ShellContent
+            Title="Задачи"
+            local:ShellProperties.IconSource="icon_task.png"
+            local:ShellProperties.PageType="TaskPageView"
+            local:ShellProperties.PrimarySelectionColor="{StaticResource Pink}"
+            local:ShellProperties.SecondarySelectionColor="{StaticResource LightPink}"
+            ContentTemplate="{DataTemplate pages:TaskPageView}"
+            Route="TaskPageView" />
+    </Tab>
+    <Tab>
+        <ShellContent
+            Title="Анализ"
+            local:ShellProperties.IconSource="icon_piechart.png"
+            local:ShellProperties.PageType="AnalysisPageView"
+            local:ShellProperties.PrimarySelectionColor="{StaticResource Blue}"
+            local:ShellProperties.SecondarySelectionColor="{StaticResource LightBlue}"
+            ContentTemplate="{DataTemplate pages:AnalysisPageView}"
+            Route="AnalysisPageView" />
+    </Tab>
+
+    <simpleShell:SimpleShell.RootPageContainer>
+        <Grid x:Name="RootContainer">
+            <simpleShell:SimpleNavigationHost />
+            <pages:TabBarView
+                Margin="0,0,0,-1"
+                CurrentPageSelectionChanged="TabBarViewCurrentPageChanged"
+                HorizontalOptions="Fill"
+                ShellItems="{Binding Path=ShellContents, Source={x:Reference Shell}}"
+                VerticalOptions="End" />
+        </Grid>
+    </simpleShell:SimpleShell.RootPageContainer>
+</simpleShell:SimpleShell>
